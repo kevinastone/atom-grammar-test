@@ -1,0 +1,16 @@
+{
+  "name": "atom-grammar-test",
+  "main": "./lib/jasmine",
+  "version": "0.1.0",
+  "description": "atom grammar test format",
+  "keywords": [],
+  "repository": "https://github.com/kevinastone/atom-grammar-test",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "coffeelint": "^1.14.2"
+  }
+}
