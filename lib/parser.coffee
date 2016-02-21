@@ -30,7 +30,7 @@ class AssertionCheck
 
   message: ->
     unless @result
-      "Expected to find #{@missing.join(', ')} at #{@assertion.line}:#{@assertion.column}"
+      "Expected to find #{@missing.join(', ')} at #{@assertion.line}:#{@assertion.column}, instead found #{@scopes.join(', ')}"
 
 
 class AssertionBuilder
