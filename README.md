@@ -1,5 +1,7 @@
 # Atom Grammar Test
 
+[![Build Status](https://travis-ci.org/kevinastone/atom-grammar-test.svg?branch=master)](https://travis-ci.org/kevinastone/atom-grammar-test)
+
 Atom Grammar Test is a testing framework for Atom Grammar definitions
 inspired by the [Syntax Testing format for Sublime Text 3][sublime-testing].
 It allows you to define grammar fixtures for testing your grammar rules.
