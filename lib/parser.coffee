@@ -71,7 +71,7 @@ class AssertionBuilder
 class AtomGrammarTestParser
   constructor: (@filename) ->
     data = fs.readFileSync(@filename, 'utf8')
-    lines = data.split '\n'
+    lines = data.split /\r\n|\r|\n/g
     throw Error("#{@filename} was empty") unless lines.length > 0
     [header, lines...] = lines
     config = HEADER_REGEX.exec header
