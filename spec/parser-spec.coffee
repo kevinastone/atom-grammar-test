@@ -17,6 +17,11 @@ describe 'AtomGrammarTest Parser', ->
     expect(@grammarTest.scope).toBe 'source.c'
     expect(new AtomGrammarTest(fixtureFilename('HTML/syntax_test_html_example.html')).scope).toBe 'text.html.basic'
 
+  it 'should parse CRLF encoded files', ->
+    parseCRLF = ->
+      new AtomGrammarTest(fixtureFilename('syntax_test_crlf.txt'))
+    expect(parseCRLF).not.toThrow()
+
   describe 'Parsing Assertions', ->
 
     it 'should strip the grammar assertions', ->
