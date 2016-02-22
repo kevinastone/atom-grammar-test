@@ -70,5 +70,10 @@ You can install `atom-grammar-test` via [npm][npm] and should add it to your
 npm install atom-grammar-test --save-dev
 ```
 
+## Projects Using Atom Grammar Test
+
+- [language-babel](https://atom.io/packages/language-babel)
+
+
 [sublime-testing]: https://www.sublimetext.com/docs/3/syntax.html#Testing
 [npm]: https://www.npmjs.com
