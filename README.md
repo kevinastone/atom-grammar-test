@@ -49,7 +49,7 @@ Once you've defined your grammar test, you can simply plug into the Jasmine
 1.3 provided by Atom:
 
 ```coffeescript
-AtomGrammarTest = require 'atom-grammar-test'
+grammarTest = require 'atom-grammar-test'
 
 describe 'My Grammar', ->
 
@@ -58,7 +58,7 @@ describe 'My Grammar', ->
     waitsForPromise ->
       atom.packages.activatePackage 'language-<your-grammar>',
 
-  AtomGrammarTest('<path to your grammar test file>')
+  grammarTest('<path to your grammar test file>')
 ```
 
 ## Installation Instructions
