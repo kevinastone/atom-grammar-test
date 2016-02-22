@@ -67,7 +67,7 @@ You can install `atom-grammar-test` via [npm][npm] and should add it to your
 `devDependencies` of your atom package's package.json:
 
 ```
-npm install atom-grammar-test
+npm install atom-grammar-test --save-dev
 ```
 
 [sublime-testing]: https://www.sublimetext.com/docs/3/syntax.html#Testing
