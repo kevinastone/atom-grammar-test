@@ -1,15 +1,9 @@
 fs = require 'fs'
-{zip} = require './utils'
+{matchScopes} = require './scope'
+
 
 HEADER_REGEX = /^(.+?)SYNTAX TEST (['"])([^\2]+)\2(.*)$/i
 SCOPE_REGEX = /\S+/gi
-
-
-matchScopes = (actual, expected) ->
-  actualArray = actual.split('.')
-  expectedArray = expected.split('.')
-  zip(actualArray, expectedArray).every ([a, e]) ->
-    a is e
 
 
 class Assertion
