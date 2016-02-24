@@ -1,4 +1,4 @@
-jasmineBuilder = require '../lib/jasmine'
+jasmineBuilder = require '../src/jasmine'
 {fixtureFilename} = require './utils'
 
 

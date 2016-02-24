@@ -1,4 +1,4 @@
-{matchScopes} = require '../lib/scope'
+{matchScopes} = require '../src/scope'
 
 
 describe 'Matching Scopes', ->
