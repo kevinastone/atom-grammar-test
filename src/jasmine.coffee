@@ -8,11 +8,13 @@ customMatchers =
 
 module.exports = (filename) ->
 
-  @beforeEach ->
-    @.addMatchers customMatchers
+  describe "AtomGrammarTest(#{filename})", ->
 
-  grammarTest = new AtomGrammarTest(filename)
-  it "should parse #{filename}", ->
+    @beforeEach ->
+      @.addMatchers customMatchers
 
-    grammarTest.test().forEach (result) ->
-      expect(result).toHaveValidGrammar()
+    grammarTest = new AtomGrammarTest(filename)
+    it "should parse #{filename}", ->
+
+      grammarTest.test().forEach (result) ->
+        expect(result).toHaveValidGrammar()
