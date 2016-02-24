@@ -1,4 +1,4 @@
-## master
+## 0.2.0
 
 - Transpile coffeescript to javascript
 - Wrap each grammar test file in a describe block

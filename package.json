@@ -1,7 +1,7 @@
 {
   "name": "atom-grammar-test",
   "main": "./lib/jasmine",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "atom grammar test format",
   "keywords": [],
   "repository": "https://github.com/kevinastone/atom-grammar-test",
