@@ -9,6 +9,9 @@
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "prepublish": "coffee -o lib -c src/*.coffee"
   },
