@@ -1,4 +1,4 @@
-AtomGrammarTest = require '../lib/parser'
+AtomGrammarTest = require '../src/parser'
 {fixtureFilename} = require './utils'
 
 
