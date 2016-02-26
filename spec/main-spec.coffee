@@ -1,4 +1,4 @@
-jasmineBuilder = require '../src/jasmine'
+grammarTest = require '../lib/main'
 {fixtureFilename} = require './utils'
 
 
@@ -10,7 +10,7 @@ describe 'Atom Grammar Test Jasmine', ->
       waitsForPromise ->
         atom.packages.activatePackage 'language-c',
 
-    jasmineBuilder fixtureFilename('C/syntax_test_c_example.c')
+    grammarTest fixtureFilename('C/syntax_test_c_example.c')
 
 
   describe 'HTML Syntax Assertions', ->
@@ -19,4 +19,4 @@ describe 'Atom Grammar Test Jasmine', ->
       waitsForPromise ->
         atom.packages.activatePackage 'language-html'
 
-    jasmineBuilder fixtureFilename('HTML/syntax_test_html_example.html')
+    grammarTest fixtureFilename('HTML/syntax_test_html_example.html')

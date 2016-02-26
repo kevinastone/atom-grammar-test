@@ -1,6 +1,6 @@
 {
   "name": "atom-grammar-test",
-  "main": "./lib/jasmine",
+  "main": "./lib/main",
   "version": "0.2.0",
   "description": "atom grammar test format",
   "keywords": [],
@@ -12,12 +12,12 @@
   "files": [
     "lib"
   ],
-  "scripts": {
-    "prepublish": "coffee -o lib -c src/*.coffee"
+  "dependencies": {
   },
-  "dependencies": {},
   "devDependencies": {
-    "coffee-script": "1.8.0",
-    "coffeelint": "^1.14.2"
+    "coffeelint": "^1.14.2",
+    "eslint": "^2.2.0",
+    "eslint-config-airbnb": "^6.0.2",
+    "eslint-plugin-react": "^4.1.0"
   }
 }
