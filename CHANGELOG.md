@@ -1,4 +1,4 @@
-## Master
+## 0.3.0 - 2016-02-27
 
 - Rewritten in ES6
 - Updated to Generate an it() test per line with assertions
