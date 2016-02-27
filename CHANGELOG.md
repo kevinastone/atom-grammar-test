@@ -1,3 +1,7 @@
+## Master
+
+- Rewritten in ES6
+
 ## 0.2.0 - 2016-02-24
 
 - Transpile coffeescript to javascript
