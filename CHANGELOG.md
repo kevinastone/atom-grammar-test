@@ -1,6 +1,7 @@
 ## Master
 
 - Rewritten in ES6
+- Updated to Generate an it() test per line with assertions
 
 ## 0.2.0 - 2016-02-24
 

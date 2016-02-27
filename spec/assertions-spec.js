@@ -4,47 +4,122 @@ import { AssertionParser } from '../lib/assertions';
 import { parsedLineFixture } from './utils';
 
 
+function parserFixture(...lines) {
+  const iterator = parsedLineFixture('blah.txt', ...lines);
+  iterator.header = {
+    openToken: '// ',
+    closeToken: '',
+    source: 'source.c',
+  };
+  return new AssertionParser(iterator);
+}
+
+
 describe('Assertions', () => {
   describe('AssertionParser', () => {
-    beforeEach(() => {
-      this.filename = 'blah.txt';
-      this.iterator = parsedLineFixture(this.filename,
+    it('should only return source lines', () => {
+      const parser = parserFixture(
         '#pragma once',
         '// <- punctuation.definition.directive meta.preprocessor.c',
+        ' // <- keyword.control.directive.pragma',
         '// ^ keyword.control.directive.pragma'
       );
-      this.iterator.header = {
-        openToken: '// ',
-        closeToken: '',
-        source: 'source.c',
-      };
-      this.parser = new AssertionParser(this.iterator);
-    });
-
-    it('should only return source lines', () => {
       expect(
-        Array.from(this.parser).map((item) => item.line)
+        Array.from(parser).map((item) => item.line)
       ).toEqual([
         '#pragma once',
       ]);
     });
 
     it('should map assertions onto the source line', () => {
-      const assertions = Array.from(this.parser)[0].assertions;
-      expect(assertions.length).toEqual(2);
+      const parser = parserFixture(
+        '#pragma once',
+        '// <- punctuation.definition.directive meta.preprocessor.c',
+        ' // <- keyword.control.directive.pragma',
+        '// ^ keyword.control.directive.pragma'
+      );
 
-      const [meta, pragma] = assertions;
+      const assertions = Array.from(parser)[0].assertions;
+      expect(assertions.length).toEqual(3);
+    });
 
-      expect(meta.scopes).toEqual([
+    it('should parse <- assertions', () => {
+      const parser = parserFixture(
+        '#pragma once',
+        '// <- punctuation.definition.directive meta.preprocessor.c'
+      );
+
+      const assertion = Array.from(parser)[0].assertions[0];
+      expect(assertion.scopes).toEqual([
         'punctuation.definition.directive',
         'meta.preprocessor.c',
       ]);
-      expect(meta.column).toEqual(1);
+      expect(assertion.column).toEqual(1);
+    });
 
-      expect(pragma.scopes).toEqual([
+    it('should parse <- assertions with leading whitespace', () => {
+      const parser = parserFixture(
+        '#pragma once',
+        ' // <- keyword.control.directive.pragma'
+      );
+
+      const assertion = Array.from(parser)[0].assertions[0];
+      expect(assertion.scopes).toEqual([
         'keyword.control.directive.pragma',
       ]);
-      expect(pragma.column).toEqual(4);
+      expect(assertion.column).toEqual(2);
+    });
+
+    it('should parse ^ assertions', () => {
+      const parser = parserFixture(
+        '#pragma once',
+        '// ^ keyword.control.directive.pragma'
+      );
+
+      const assertion = Array.from(parser)[0].assertions[0];
+      expect(assertion.scopes).toEqual([
+        'keyword.control.directive.pragma',
+      ]);
+      expect(assertion.column).toEqual(4);
+    });
+
+    it('should parse ^ assertions with leading whitespace', () => {
+      const parser = parserFixture(
+        '#pragma once',
+        '  // ^ keyword.control.directive.pragma'
+      );
+
+      const assertion = Array.from(parser)[0].assertions[0];
+      expect(assertion.scopes).toEqual([
+        'keyword.control.directive.pragma',
+      ]);
+      expect(assertion.column).toEqual(6);
+    });
+
+    it('should parse ^ assertions with prefixed whitespace whitespace', () => {
+      const parser = parserFixture(
+        '#pragma once',
+        '//    ^ keyword.control.directive.pragma'
+      );
+
+      const assertion = Array.from(parser)[0].assertions[0];
+      expect(assertion.scopes).toEqual([
+        'keyword.control.directive.pragma',
+      ]);
+      expect(assertion.column).toEqual(7);
+    });
+
+    it('should parse ^^+ assertions', () => {
+      const parser = parserFixture(
+        '#pragma once',
+        '// ^^^^ keyword.control.directive.pragma'
+      );
+
+      const assertion = Array.from(parser)[0].assertions[0];
+      expect(assertion.scopes).toEqual([
+        'keyword.control.directive.pragma',
+      ]);
+      expect(assertion.column).toEqual(4);
     });
   });
 });
