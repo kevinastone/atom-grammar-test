@@ -1,5 +1,6 @@
 # Atom Grammar Test
 
+[![npm version](https://badge.fury.io/js/atom-grammar-test.svg)](https://badge.fury.io/js/atom-grammar-test)
 [![Build Status](https://travis-ci.org/kevinastone/atom-grammar-test.svg?branch=master)](https://travis-ci.org/kevinastone/atom-grammar-test)
 
 Atom Grammar Test is a testing framework for Atom Grammar definitions
