@@ -121,5 +121,25 @@ describe('Assertions', () => {
       ]);
       expect(assertion.column).toEqual(4);
     });
+
+    it('should parse multiple carats separated by spaces (^   ^ some.rule)', () => {
+      const parser = parserFixture(
+        '#pragma once',
+        '// ^     ^ some.symbol'
+      );
+
+      const assertions = Array.from(parser)[0].assertions;
+      expect(assertions.length).toBe(2);
+      const [assertion1, assertion2] = assertions;
+      expect(assertion1.scopes).toEqual([
+        'some.symbol',
+      ]);
+      expect(assertion1.column).toEqual(4);
+
+      expect(assertion2.scopes).toEqual([
+        'some.symbol',
+      ]);
+      expect(assertion2.column).toEqual(10);
+    });
   });
 });
