@@ -9,12 +9,16 @@
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
+  "scripts": {
+    "parser": "./node_modules/.bin/pegjs lib/grammar.pegjs lib/grammar.js"
+  },
   "files": [
     "lib"
   ],
   "dependencies": {
   },
   "devDependencies": {
+    "pegjs": "^0.9.0",
     "eslint": "^2.2.0",
     "eslint-config-airbnb": "^6.0.2",
     "eslint-plugin-react": "^4.1.0"
