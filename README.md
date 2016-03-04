@@ -74,6 +74,7 @@ npm install atom-grammar-test --save-dev
 ## Projects Using Atom Grammar Test
 
 - [language-babel](https://atom.io/packages/language-babel)
+- [language-html](https://atom.io/packages/language-html)
 
 
 [sublime-testing]: https://www.sublimetext.com/docs/3/syntax.html#Testing
