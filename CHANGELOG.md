@@ -1,3 +1,8 @@
+## master
+
+- Added PEGjs based parser
+- Support multiple carats on a single line
+
 ## 0.3.0 - 2016-02-27
 
 - Rewritten in ES6
