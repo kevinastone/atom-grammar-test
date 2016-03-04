@@ -1,4 +1,4 @@
-## master
+## 0.4.0 - 2016-03-03
 
 - Added PEGjs based parser
 - Support multiple carats on a single line
