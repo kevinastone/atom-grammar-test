@@ -15,5 +15,6 @@ describe('Atom Grammar Test Jasmine', () => {
   describe('HTML Syntax Assertions', () => {
     beforeEach(() => waitsForPromise(() => atom.packages.activatePackage('language-html')));
     grammarTest(fixtureFilename('HTML/syntax_test_html_example.html'));
+    grammarTest(fixtureFilename('HTML/syntax_test_html_inline.html'));
   });
 });

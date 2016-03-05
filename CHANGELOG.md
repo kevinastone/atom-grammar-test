@@ -1,3 +1,9 @@
+# Changelog
+
+## master
+
+- Added start-of-line (<<) and end-of-line (>>) position operators
+
 ## 0.4.0 - 2016-03-03
 
 - Added PEGjs based parser
