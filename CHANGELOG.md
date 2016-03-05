@@ -1,6 +1,6 @@
 # Changelog
 
-## master
+## 0.4.0 - 2016-03-05
 
 - Added start-of-line (<<) and end-of-line (>>) position operators
 - Added scope matching modifier and grouping (`only:` or `=`)
