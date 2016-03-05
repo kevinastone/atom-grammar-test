@@ -1,6 +1,6 @@
 'use babel';
 
-import { zip, takeWhile } from '../lib/utils';
+import { zip, zipLongest, takeWhile } from '../lib/utils';
 
 
 describe('Utils', () => {
@@ -15,6 +15,20 @@ describe('Utils', () => {
 
     it('should zip no arrays', () => {
       expect(zip()).toEqual([]);
+    });
+  });
+
+  describe('zipLongest', () => {
+    it('should zip arrays', () => {
+      expect(zipLongest([1, 2], [3, 4])).toEqual([[1, 3], [2, 4]]);
+    });
+
+    it('should zip the longest arrays', () => {
+      expect(zipLongest([1, 2], [3])).toEqual([[1, 3], [2, undefined]]);
+    });
+
+    it('should zip no arrays', () => {
+      expect(zipLongest()).toEqual([]);
     });
   });
 

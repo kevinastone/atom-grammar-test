@@ -3,6 +3,10 @@
 ## master
 
 - Added start-of-line (<<) and end-of-line (>>) position operators
+- Added scope matching modifier and grouping (`only:` or `=`)
+  - =(scope1 scope2)
+  - only:scope1
+  - =scope1
 
 ## 0.4.0 - 2016-03-03
 
