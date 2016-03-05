@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.1 - 2016-03-05
+
+- Fixed parsing bug for `only:` modifier
+
 ## 0.4.0 - 2016-03-05
 
 - Added start-of-line (<<) and end-of-line (>>) position operators

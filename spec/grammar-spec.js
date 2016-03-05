@@ -129,6 +129,13 @@ describe('Grammar', () => {
           ]);
         });
 
+        it('should parse single part scope', () => {
+          expect(parse.parse('<- only:something')).toEqual([
+            [1],
+            ['=', ['something']],
+          ]);
+        });
+
         it('should parse grouped scope', () => {
           expect(parse.parse('<- =(something else)')).toEqual([
             [1],
@@ -136,8 +143,19 @@ describe('Grammar', () => {
           ]);
         });
 
+        it('should parse grouped scope', () => {
+          expect(parse.parse('<- only:(something else)')).toEqual([
+            [1],
+            ['=', ['something', 'else']],
+          ]);
+        });
+
         it('should not parse ungrouped scope', () => {
           expect(() => parse.parse('<- =something else')).toThrow();
+        });
+
+        it('should not parse ungrouped scope', () => {
+          expect(() => parse.parse('<- only:something else')).toThrow();
         });
       });
     });
