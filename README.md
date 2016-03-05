@@ -44,6 +44,9 @@ int square(int x)
 "Hello, World! // not a comment";
 // ^ string.quoted.double
 //                  ^ string.quoted.double
+
+// EOF Check (root scope)
+// >> source.c
 ```
 
 Once you've defined your grammar test, you can simply plug into the Jasmine
