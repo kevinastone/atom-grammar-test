@@ -43,6 +43,60 @@ describe('Assertions', () => {
       expect(assertions.length).toEqual(3);
     });
 
+    it('should parse << assertions', () => {
+      const parser = parserFixture(
+        '#pragma once',
+        '// << punctuation.definition.directive meta.preprocessor.c'
+      );
+
+      const assertion = Array.from(parser)[0].assertions[0];
+      expect(assertion.scopes).toEqual([
+        'punctuation.definition.directive',
+        'meta.preprocessor.c',
+      ]);
+      expect(assertion.column).toEqual(0);
+    });
+
+    it('should parse << assertions with leading whitespace', () => {
+      const parser = parserFixture(
+        '#pragma once',
+        ' // << keyword.control.directive.pragma'
+      );
+
+      const assertion = Array.from(parser)[0].assertions[0];
+      expect(assertion.scopes).toEqual([
+        'keyword.control.directive.pragma',
+      ]);
+      expect(assertion.column).toEqual(0);
+    });
+
+    it('should parse >> assertions', () => {
+      const parser = parserFixture(
+        '#pragma once',
+        '// >> punctuation.definition.directive meta.preprocessor.c'
+      );
+
+      const assertion = Array.from(parser)[0].assertions[0];
+      expect(assertion.scopes).toEqual([
+        'punctuation.definition.directive',
+        'meta.preprocessor.c',
+      ]);
+      expect(assertion.column).toEqual(-1);
+    });
+
+    it('should parse >> assertions with leading whitespace', () => {
+      const parser = parserFixture(
+        '#pragma once',
+        ' // >> keyword.control.directive.pragma'
+      );
+
+      const assertion = Array.from(parser)[0].assertions[0];
+      expect(assertion.scopes).toEqual([
+        'keyword.control.directive.pragma',
+      ]);
+      expect(assertion.column).toEqual(-1);
+    });
+
     it('should parse <- assertions', () => {
       const parser = parserFixture(
         '#pragma once',

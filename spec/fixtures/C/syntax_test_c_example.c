@@ -28,3 +28,6 @@ int square(int x)
 "Hello, World! // not a comment";
 // ^ string.quoted.double
 //                  ^ string.quoted.double
+
+// EOF Check (root scope)
+// >> source.c

@@ -30,30 +30,44 @@ describe('Grammar', () => {
     itShouldNotParse('<- ');
 
     describe('Positions', () => {
-      it('should parse start token operators', () => {
-        expect(parse.parse('<- something')).toEqual([
+      it('should parse start line operators', () => {
+        expect(parse.parse('<< something')).toEqual([
           [0],
+          ['something'],
+        ]);
+      });
+
+      it('should parse end line operators', () => {
+        expect(parse.parse('>> something')).toEqual([
+          [-1],
+          ['something'],
+        ]);
+      });
+
+      it('should parse open token operators', () => {
+        expect(parse.parse('<- something')).toEqual([
+          [1],
           ['something'],
         ]);
       });
 
       it('should parse carat operators', () => {
         expect(parse.parse('    ^ something')).toEqual([
-          [5],
+          [6],
           ['something'],
         ]);
       });
 
       it('should parse multiple carat operators', () => {
         expect(parse.parse(' ^  ^ something')).toEqual([
-          [2, 5],
+          [3, 6],
           ['something'],
         ]);
       });
 
       it('should parse consecutive carat operators', () => {
         expect(parse.parse(' ^^^^ something')).toEqual([
-          [2, 3, 4, 5],
+          [3, 4, 5, 6],
           ['something'],
         ]);
       });
@@ -62,28 +76,28 @@ describe('Grammar', () => {
     describe('Scopes', () => {
       it('should parse single part scope', () => {
         expect(parse.parse('<- something')).toEqual([
-          [0],
+          [1],
           ['something'],
         ]);
       });
 
       it('should parse a multipart scope', () => {
         expect(parse.parse('<- something.else')).toEqual([
-          [0],
+          [1],
           ['something.else'],
         ]);
       });
 
       it('should parse a multiple scopes', () => {
         expect(parse.parse('<- something else')).toEqual([
-          [0],
+          [1],
           ['something', 'else'],
         ]);
       });
 
       it('should parse a multipart scope with a dash', () => {
         expect(parse.parse('<- something.my-attr else')).toEqual([
-          [0],
+          [1],
           ['something.my-attr', 'else'],
         ]);
       });
