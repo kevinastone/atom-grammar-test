@@ -20,7 +20,9 @@
     "eslint": "^2.2.0",
     "eslint-config-airbnb": "^6.0.2",
     "eslint-plugin-react": "^4.1.0",
-    "jasmine-es6": "^0.1.6",
     "pegjs": "^0.9.0"
+  },
+  "optionalDevDependencies": {
+    "jasmine-es6": "^0.1.6"
   }
 }
