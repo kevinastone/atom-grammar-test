@@ -50,7 +50,7 @@ describe('Assertions', () => {
       );
 
       const assertion = Array.from(parser)[0].assertions[0];
-      expect(assertion.scopes).toEqual([
+      expect(assertion.matcher.scopes).toEqual([
         'punctuation.definition.directive',
         'meta.preprocessor.c',
       ]);
@@ -64,7 +64,7 @@ describe('Assertions', () => {
       );
 
       const assertion = Array.from(parser)[0].assertions[0];
-      expect(assertion.scopes).toEqual([
+      expect(assertion.matcher.scopes).toEqual([
         'keyword.control.directive.pragma',
       ]);
       expect(assertion.column).toEqual(0);
@@ -77,7 +77,7 @@ describe('Assertions', () => {
       );
 
       const assertion = Array.from(parser)[0].assertions[0];
-      expect(assertion.scopes).toEqual([
+      expect(assertion.matcher.scopes).toEqual([
         'punctuation.definition.directive',
         'meta.preprocessor.c',
       ]);
@@ -91,7 +91,7 @@ describe('Assertions', () => {
       );
 
       const assertion = Array.from(parser)[0].assertions[0];
-      expect(assertion.scopes).toEqual([
+      expect(assertion.matcher.scopes).toEqual([
         'keyword.control.directive.pragma',
       ]);
       expect(assertion.column).toEqual(-1);
@@ -104,7 +104,7 @@ describe('Assertions', () => {
       );
 
       const assertion = Array.from(parser)[0].assertions[0];
-      expect(assertion.scopes).toEqual([
+      expect(assertion.matcher.scopes).toEqual([
         'punctuation.definition.directive',
         'meta.preprocessor.c',
       ]);
@@ -118,7 +118,7 @@ describe('Assertions', () => {
       );
 
       const assertion = Array.from(parser)[0].assertions[0];
-      expect(assertion.scopes).toEqual([
+      expect(assertion.matcher.scopes).toEqual([
         'keyword.control.directive.pragma',
       ]);
       expect(assertion.column).toEqual(2);
@@ -131,7 +131,7 @@ describe('Assertions', () => {
       );
 
       const assertion = Array.from(parser)[0].assertions[0];
-      expect(assertion.scopes).toEqual([
+      expect(assertion.matcher.scopes).toEqual([
         'keyword.control.directive.pragma',
       ]);
       expect(assertion.column).toEqual(4);
@@ -144,7 +144,7 @@ describe('Assertions', () => {
       );
 
       const assertion = Array.from(parser)[0].assertions[0];
-      expect(assertion.scopes).toEqual([
+      expect(assertion.matcher.scopes).toEqual([
         'keyword.control.directive.pragma',
       ]);
       expect(assertion.column).toEqual(6);
@@ -157,7 +157,7 @@ describe('Assertions', () => {
       );
 
       const assertion = Array.from(parser)[0].assertions[0];
-      expect(assertion.scopes).toEqual([
+      expect(assertion.matcher.scopes).toEqual([
         'keyword.control.directive.pragma',
       ]);
       expect(assertion.column).toEqual(7);
@@ -170,7 +170,7 @@ describe('Assertions', () => {
       );
 
       const assertion = Array.from(parser)[0].assertions[0];
-      expect(assertion.scopes).toEqual([
+      expect(assertion.matcher.scopes).toEqual([
         'keyword.control.directive.pragma',
       ]);
       expect(assertion.column).toEqual(4);
@@ -185,12 +185,12 @@ describe('Assertions', () => {
       const assertions = Array.from(parser)[0].assertions;
       expect(assertions.length).toBe(2);
       const [assertion1, assertion2] = assertions;
-      expect(assertion1.scopes).toEqual([
+      expect(assertion1.matcher.scopes).toEqual([
         'some.symbol',
       ]);
       expect(assertion1.column).toEqual(4);
 
-      expect(assertion2.scopes).toEqual([
+      expect(assertion2.matcher.scopes).toEqual([
         'some.symbol',
       ]);
       expect(assertion2.column).toEqual(10);

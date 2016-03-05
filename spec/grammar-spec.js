@@ -23,52 +23,56 @@ describe('Grammar', () => {
     itShouldParse('    ^              ^   meta.brace.curly.js');
     itShouldParse('    ^ blah.blah');
     itShouldParse('    ^^^^    Something');
+    itShouldParse('<- =something');
+    itShouldParse('<- only:something');
 
     itShouldNotParse('');
     itShouldNotParse('nothing');
     itShouldNotParse('^ ');
     itShouldNotParse('<- ');
+    itShouldNotParse('<- =something else');
+    itShouldNotParse('<- only:something else');
 
     describe('Positions', () => {
       it('should parse start line operators', () => {
         expect(parse.parse('<< something')).toEqual([
           [0],
-          ['something'],
+          ['@', ['something']],
         ]);
       });
 
       it('should parse end line operators', () => {
         expect(parse.parse('>> something')).toEqual([
           [-1],
-          ['something'],
+          ['@', ['something']],
         ]);
       });
 
       it('should parse open token operators', () => {
         expect(parse.parse('<- something')).toEqual([
           [1],
-          ['something'],
+          ['@', ['something']],
         ]);
       });
 
       it('should parse carat operators', () => {
         expect(parse.parse('    ^ something')).toEqual([
           [6],
-          ['something'],
+          ['@', ['something']],
         ]);
       });
 
       it('should parse multiple carat operators', () => {
         expect(parse.parse(' ^  ^ something')).toEqual([
           [3, 6],
-          ['something'],
+          ['@', ['something']],
         ]);
       });
 
       it('should parse consecutive carat operators', () => {
         expect(parse.parse(' ^^^^ something')).toEqual([
           [3, 4, 5, 6],
-          ['something'],
+          ['@', ['something']],
         ]);
       });
     });
@@ -77,29 +81,64 @@ describe('Grammar', () => {
       it('should parse single part scope', () => {
         expect(parse.parse('<- something')).toEqual([
           [1],
-          ['something'],
+          ['@', ['something']],
+        ]);
+      });
+
+      it('should parse single part scope with a modifier', () => {
+        expect(parse.parse('<- =something')).toEqual([
+          [1],
+          ['=', ['something']],
         ]);
       });
 
       it('should parse a multipart scope', () => {
         expect(parse.parse('<- something.else')).toEqual([
           [1],
-          ['something.else'],
+          ['@', ['something.else']],
         ]);
       });
 
-      it('should parse a multiple scopes', () => {
+      it('should parse multiple scopes', () => {
         expect(parse.parse('<- something else')).toEqual([
           [1],
-          ['something', 'else'],
+          ['@', ['something', 'else']],
+        ]);
+      });
+
+
+      it('should parse grouped multiple scopes', () => {
+        expect(parse.parse('<- (something else.other)')).toEqual([
+          [1],
+          ['@', ['something', 'else.other']],
         ]);
       });
 
       it('should parse a multipart scope with a dash', () => {
         expect(parse.parse('<- something.my-attr else')).toEqual([
           [1],
-          ['something.my-attr', 'else'],
+          ['@', ['something.my-attr', 'else']],
         ]);
+      });
+
+      describe('Modifiers', () => {
+        it('should parse single part scope', () => {
+          expect(parse.parse('<- =something')).toEqual([
+            [1],
+            ['=', ['something']],
+          ]);
+        });
+
+        it('should parse grouped scope', () => {
+          expect(parse.parse('<- =(something else)')).toEqual([
+            [1],
+            ['=', ['something', 'else']],
+          ]);
+        });
+
+        it('should not parse ungrouped scope', () => {
+          expect(() => parse.parse('<- =something else')).toThrow();
+        });
       });
     });
   });

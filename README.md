@@ -46,7 +46,7 @@ int square(int x)
 //                  ^ string.quoted.double
 
 // EOF Check (root scope)
-// >> source.c
+// >> =source.c
 ```
 
 Once you've defined your grammar test, you can simply plug into the Jasmine
