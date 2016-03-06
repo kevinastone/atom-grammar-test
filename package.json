@@ -37,6 +37,7 @@
     "eslint-plugin-import": "^2.1.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.7.0",
+    "flow-bin": "^0.22.1",
     "inliner": "^1.8.1"
   },
   "optionalDevDependencies": {
