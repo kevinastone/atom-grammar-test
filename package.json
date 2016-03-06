@@ -19,7 +19,8 @@
     "babel-eslint": "^5.0.0",
     "eslint": "2.2.*",
     "eslint-config-airbnb": "^6.0.2",
-    "eslint-plugin-react": "^4.1.0"
+    "eslint-plugin-react": "^4.1.0",
+    "flow-bin": "^0.22.1"
   },
   "optionalDevDependencies": {
     "jasmine-es6": "^0.1.6"
