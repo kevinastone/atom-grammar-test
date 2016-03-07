@@ -1,4 +1,5 @@
 'use babel';
+/* @flow */
 
 import { lines } from '../lib/io';
 import { fixtureFilename } from './utils';
