@@ -18,7 +18,7 @@ function* _lines/* :: <T> */(...lines /* : Array<T> */) /* : Iterator<T> */ {
 
 export function lineFixture/* :: <T> */(filename /* : string */, ...lines /* : Array<T> */) /* : Iterator<T> */ {
   const iterator = _lines(...lines);
-  // $FlowFixMe: Flow doesn't support sub-classed generators
+  // $FlowFixMe: Unknown filename
   iterator.filename = filename;
   return iterator;
 }
