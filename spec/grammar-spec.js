@@ -1,4 +1,5 @@
 'use babel';
+/* @flow */
 
 import parser from '../lib/grammar';
 import { escapeSpecName } from '../lib/jasmine';

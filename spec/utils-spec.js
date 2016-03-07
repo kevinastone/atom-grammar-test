@@ -1,4 +1,5 @@
 'use babel';
+/* @flow */
 
 import { zip, zipLongest, takeWhile, PreventReturn } from '../lib/utils';
 import { ReturnableIterator } from './utils';
@@ -44,11 +45,13 @@ describe('Utils', () => {
       expect(Array.from(takeWhile([0, 1, 2], item => !item))).toEqual([0, 1]);
     });
     it('should return work with iterators when called consecutively', () => {
+      // $FlowIssue: can't handle computed properties
       const it = [0, 1, 0, 2, 0][Symbol.iterator]();
       expect(Array.from(takeWhile(it, item => !item))).toEqual([0, 1]);
       expect(Array.from(takeWhile(it, item => !item))).toEqual([0, 2]);
     });
     it('should return empty if the iterator is exhausted', () => {
+      // $FlowIssue: can't handle computed properties
       const it = [0, 1][Symbol.iterator]();
       expect(Array.from(takeWhile(it, item => !item))).toEqual([0, 1]);
       expect(Array.from(takeWhile(it, item => !item))).toEqual([]);

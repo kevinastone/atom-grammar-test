@@ -1,4 +1,6 @@
 'use babel';
+/* @flow */
+
 
 import { matchScopes } from '../lib/scope';
 

@@ -1,17 +1,29 @@
 'use babel';
+/* @flow */
 
 import { AssertionParser } from '../lib/assertions';
 import { Not, Only } from '../lib/matchers';
 import { parsedLineFixture } from './utils';
 
+/* ::
+import type { Header, HeaderIterable } from '../lib/parser';
+*/
+
+// Neeed to fake Flow out
+function _annotateIterator(iterator /* : any */, header /* : Header */) /* : HeaderIterable */ {
+  return Object.assign(iterator, { header });
+}
+
 
 function parserFixture(openToken, closeToken, ...lines) {
-  const iterator = parsedLineFixture('blah.txt', ...lines);
-  iterator.header = {
-    openToken,
-    closeToken,
-    source: 'source.c',
-  };
+  const iterator = _annotateIterator(
+    parsedLineFixture('blah.txt', ...lines),
+    {
+      openToken,
+      closeToken,
+      scope: 'source.c',
+    }
+  );
   return new AssertionParser(iterator);
 }
 
