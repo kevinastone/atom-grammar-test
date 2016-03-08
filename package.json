@@ -15,9 +15,12 @@
   "files": [
     "lib"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "chevrotain": "^0.5.19"
+  },
   "devDependencies": {
-    "eslint": "^2.2.0",
+    "babel-eslint": "^5.0.0",
+    "eslint": "2.2.*",
     "eslint-config-airbnb": "^6.0.2",
     "eslint-plugin-react": "^4.1.0",
     "pegjs": "^0.9.0"
