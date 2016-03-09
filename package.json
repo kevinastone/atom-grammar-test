@@ -9,9 +9,6 @@
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
-  "scripts": {
-    "parser": "./node_modules/.bin/pegjs lib/grammar.pegjs lib/grammar.js"
-  },
   "files": [
     "lib"
   ],
@@ -22,8 +19,7 @@
     "babel-eslint": "^5.0.0",
     "eslint": "2.2.*",
     "eslint-config-airbnb": "^6.0.2",
-    "eslint-plugin-react": "^4.1.0",
-    "pegjs": "^0.9.0"
+    "eslint-plugin-react": "^4.1.0"
   },
   "optionalDevDependencies": {
     "jasmine-es6": "^0.1.6"
