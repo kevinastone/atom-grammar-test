@@ -1,10 +1,14 @@
 # Changelog
 
-## 0.4.1 - 2016-03-05
+## master
+
+- Switched from PEGjs to Chevrotain parser
+
+## 0.5.1 - 2016-03-05
 
 - Fixed parsing bug for `only:` modifier
 
-## 0.4.0 - 2016-03-05
+## 0.5.0 - 2016-03-05
 
 - Added start-of-line (<<) and end-of-line (>>) position operators
 - Added scope matching modifier and grouping (`only:` or `=`)

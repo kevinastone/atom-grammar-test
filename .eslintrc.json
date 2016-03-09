@@ -1,6 +1,7 @@
 {
   "extends": "airbnb",
-  "ecmaFeatures": { "destructuring": true },
+  "parser": "babel-eslint",
+  "ecmaFeatures": { "destructuring": true, "classes": true },
   "env": {
     "es6": true,
     "node": true,
