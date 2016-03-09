@@ -1,6 +1,6 @@
 'use babel';
 
-import { Contains, Only } from '../lib/matchers';
+import { Contains, Only, Not } from '../lib/matchers';
 
 
 describe('Matchers', () => {
@@ -45,6 +45,28 @@ describe('Matchers', () => {
 
     it('should not match a single value against multiple values', () => {
       expect(new Only('test').matches('test', 'test2')).toBeFalsy();
+    });
+  });
+
+  describe('Not', () => {
+    it('should not match equal single value', () => {
+      expect(new Not('test').matches('test')).toBeFalsy();
+    });
+
+    it('should match a single value against multiple values', () => {
+      expect(new Not('test').matches('test', 'test2')).toBeFalsy();
+    });
+
+    it('should match a different value against a single value', () => {
+      expect(new Not('blah').matches('test')).toBeTruthy();
+    });
+
+    it('should match a different value against multiple values', () => {
+      expect(new Not('blah').matches('test', 'test2')).toBeTruthy();
+    });
+
+    it('should match multiple different value against multiple values', () => {
+      expect(new Not('blah', 'argh').matches('test', 'test2')).toBeTruthy();
     });
   });
 });

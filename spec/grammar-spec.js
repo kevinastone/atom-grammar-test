@@ -40,11 +40,13 @@ describe('Grammar', () => {
     itShouldLex('// <- something');
     itShouldLex('// <-        something');
     itShouldLex('// <- =something');
+    itShouldLex('// <- !something');
     itShouldLex('// <- only:something');
     itShouldLex('// <- only:something.else');
     itShouldLex('// <- only:something.else');
     itShouldLex('// <- only:(something.else another)');
     itShouldLex('// <- only:(something.else)');
+    itShouldLex('// <- not:(something.else)');
 
     itShouldNotLex('##');
     itShouldNotLex('<>');
@@ -150,6 +152,12 @@ describe('Grammar', () => {
       itShouldParse('// << only:(something)');
       itShouldParse('// << only:(something.else)');
       itShouldParse('// << only:(something another.else)');
+      itShouldParse('// << !(something)');
+      itShouldParse('// << !(something.else)');
+      itShouldParse('// << !(something another.else)');
+      itShouldParse('// << not:(something)');
+      itShouldParse('// << not:(something.else)');
+      itShouldParse('// << not:(something another.else)');
 
       itShouldNotParse('// << something.');
       itShouldNotParse('// << .something');
@@ -161,6 +169,12 @@ describe('Grammar', () => {
       itShouldNotParse('// << only:');
       itShouldNotParse('// << only:()');
       itShouldNotParse('// << only:something another');
+      itShouldNotParse('// << !');
+      itShouldNotParse('// << !()');
+      itShouldNotParse('// << !:something another');
+      itShouldNotParse('// << not:');
+      itShouldNotParse('// << not:()');
+      itShouldNotParse('// << not:something another');
 
       it('should parse a single scope', () => {
         expect(parse(lex('// << something'))).toEqual([
@@ -208,6 +222,34 @@ describe('Grammar', () => {
         expect(parse(lex('// << =(something another)'))).toEqual([
           [0],
           ['=', ['something', 'another']],
+        ]);
+      });
+
+      it('should parse a negated single scope', () => {
+        expect(parse(lex('// << !something'))).toEqual([
+          [0],
+          ['!', ['something']],
+        ]);
+      });
+
+      it('should parse a negated grouped single scope', () => {
+        expect(parse(lex('// << not:(something)'))).toEqual([
+          [0],
+          ['!', ['something']],
+        ]);
+      });
+
+      it('should parse a single negated nested scope', () => {
+        expect(parse(lex('// << !something.else'))).toEqual([
+          [0],
+          ['!', ['something.else']],
+        ]);
+      });
+
+      it('should parse negated multiple scopes', () => {
+        expect(parse(lex('// << !(something another)'))).toEqual([
+          [0],
+          ['!', ['something', 'another']],
         ]);
       });
     });

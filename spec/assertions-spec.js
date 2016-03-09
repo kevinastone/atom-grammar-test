@@ -1,6 +1,7 @@
 'use babel';
 
 import { AssertionParser } from '../lib/assertions';
+import { Not, Only } from '../lib/matchers';
 import { parsedLineFixture } from './utils';
 
 
@@ -35,7 +36,7 @@ describe('Assertions', () => {
       const parser = parserFixture('<!-- ', ' -->',
         '<script> console.log("hi"); </script>',
         '<!-- << =text.html.basic -->',
-        '<!-- >> source.js.embedded.html -->',
+        '<!-- >> !source.js.embedded.html -->',
         '<!-- >> =text.html.basic -->',
       );
 
@@ -206,6 +207,32 @@ describe('Assertions', () => {
         'some.symbol',
       ]);
       expect(assertion2.column).toEqual(10);
+    });
+
+    it('should parse only modifiers', () => {
+      const parser = parserFixture('// ', '',
+        '#pragma once',
+        '// ^ =something.else'
+      );
+
+      const assertion = Array.from(parser)[0].assertions[0];
+      expect(assertion.matcher instanceof Only).toBeTruthy();
+      expect(assertion.matcher.scopes).toEqual([
+        'something.else',
+      ]);
+    });
+
+    it('should parse not modifiers', () => {
+      const parser = parserFixture('// ', '',
+        '#pragma once',
+        '// ^ !something.else'
+      );
+
+      const assertion = Array.from(parser)[0].assertions[0];
+      expect(assertion.matcher instanceof Not).toBeTruthy();
+      expect(assertion.matcher.scopes).toEqual([
+        'something.else',
+      ]);
     });
   });
 });
