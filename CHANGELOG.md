@@ -1,12 +1,12 @@
 # Changelog
 
-## master
+## 0.6.0 - 2016-03-09
 
-- Switched from PEGjs to Chevrotain parser
 - Added negation modifier
- - !(scope1 scope2)
- - not:scope1
- = !scope1
+  - !(scope1 scope2)
+  - not:scope1
+  - !scope1
+- Switched from PEGjs to Chevrotain parser
 
 ## 0.5.1 - 2016-03-05
 
