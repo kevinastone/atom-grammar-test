@@ -35,7 +35,7 @@ describe('Assertions', () => {
       const parser = parserFixture('<!-- ', ' -->',
         '<script> console.log("hi"); </script>',
         '<!-- << =text.html.basic -->',
-        '<!-- >> source.js.embedded.html -->',
+        '<!-- >> !source.js.embedded.html -->',
         '<!-- >> =text.html.basic -->',
       );
 
