@@ -51,6 +51,16 @@ describe('Grammar', () => {
     itShouldNotLex('//<- %something');
     itShouldNotLex('// <- %something');
     itShouldNotLex('// <- %something');
+
+    it('should could correctly lex custom open tokens', () => {
+      const { lex: hashLex } = parser('##########');
+      expect(() => hashLex('##########<- something')).not.toThrow();
+    });
+
+    it('should could correctly lex custom open and closetokens', () => {
+      const { lex: hashLex } = parser('<!-- ', ' -->');
+      expect(() => hashLex('<!-- <- something -->')).not.toThrow();
+    });
   });
 
   describe('Parsing', () => {
@@ -60,8 +70,16 @@ describe('Grammar', () => {
       itShouldParse('   // << something');
 
       it('should could correctly parse custom open tokens', () => {
-        const { lex: hashLex, parse: hashParse } = parser('##########');
-        expect(hashParse(hashLex('##########<- something'))).toEqual([
+        const { lex: htmlLex, parse: htmlParse } = parser('##########');
+        expect(htmlParse(htmlLex('##########<- something'))).toEqual([
+          [1],
+          ['@', ['something']],
+        ]);
+      });
+
+      it('should could correctly parse custom open and close tokens', () => {
+        const { lex: hashLex, parse: hashParse } = parser('<!-- ', ' -->');
+        expect(hashParse(hashLex('<!-- <- something -->'))).toEqual([
           [1],
           ['@', ['something']],
         ]);

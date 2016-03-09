@@ -4,11 +4,11 @@ import { AssertionParser } from '../lib/assertions';
 import { parsedLineFixture } from './utils';
 
 
-function parserFixture(...lines) {
+function parserFixture(openToken, closeToken, ...lines) {
   const iterator = parsedLineFixture('blah.txt', ...lines);
   iterator.header = {
-    openToken: '// ',
-    closeToken: '',
+    openToken,
+    closeToken,
     source: 'source.c',
   };
   return new AssertionParser(iterator);
@@ -18,7 +18,7 @@ function parserFixture(...lines) {
 describe('Assertions', () => {
   describe('AssertionParser', () => {
     it('should only return source lines', () => {
-      const parser = parserFixture(
+      const parser = parserFixture('// ', '',
         '#pragma once',
         '// <- punctuation.definition.directive meta.preprocessor.c',
         ' // <- keyword.control.directive.pragma',
@@ -31,8 +31,20 @@ describe('Assertions', () => {
       ]);
     });
 
+    it('should parse alternative open and close tokens', () => {
+      const parser = parserFixture('<!-- ', ' -->',
+        '<script> console.log("hi"); </script>',
+        '<!-- << =text.html.basic -->',
+        '<!-- >> source.js.embedded.html -->',
+        '<!-- >> =text.html.basic -->',
+      );
+
+      const assertions = Array.from(parser)[0].assertions;
+      expect(assertions.length).toEqual(3);
+    });
+
     it('should map assertions onto the source line', () => {
-      const parser = parserFixture(
+      const parser = parserFixture('// ', '',
         '#pragma once',
         '// <- punctuation.definition.directive meta.preprocessor.c',
         ' // <- keyword.control.directive.pragma',
@@ -44,7 +56,7 @@ describe('Assertions', () => {
     });
 
     it('should parse << assertions', () => {
-      const parser = parserFixture(
+      const parser = parserFixture('// ', '',
         '#pragma once',
         '// << punctuation.definition.directive meta.preprocessor.c'
       );
@@ -58,7 +70,7 @@ describe('Assertions', () => {
     });
 
     it('should parse << assertions with leading whitespace', () => {
-      const parser = parserFixture(
+      const parser = parserFixture('// ', '',
         '#pragma once',
         ' // << keyword.control.directive.pragma'
       );
@@ -71,7 +83,7 @@ describe('Assertions', () => {
     });
 
     it('should parse >> assertions', () => {
-      const parser = parserFixture(
+      const parser = parserFixture('// ', '',
         '#pragma once',
         '// >> punctuation.definition.directive meta.preprocessor.c'
       );
@@ -85,7 +97,7 @@ describe('Assertions', () => {
     });
 
     it('should parse >> assertions with leading whitespace', () => {
-      const parser = parserFixture(
+      const parser = parserFixture('// ', '',
         '#pragma once',
         ' // >> keyword.control.directive.pragma'
       );
@@ -98,7 +110,7 @@ describe('Assertions', () => {
     });
 
     it('should parse <- assertions', () => {
-      const parser = parserFixture(
+      const parser = parserFixture('// ', '',
         '#pragma once',
         '// <- punctuation.definition.directive meta.preprocessor.c'
       );
@@ -112,7 +124,7 @@ describe('Assertions', () => {
     });
 
     it('should parse <- assertions with leading whitespace', () => {
-      const parser = parserFixture(
+      const parser = parserFixture('// ', '',
         '#pragma once',
         ' // <- keyword.control.directive.pragma'
       );
@@ -125,7 +137,7 @@ describe('Assertions', () => {
     });
 
     it('should parse ^ assertions', () => {
-      const parser = parserFixture(
+      const parser = parserFixture('// ', '',
         '#pragma once',
         '// ^ keyword.control.directive.pragma'
       );
@@ -138,7 +150,7 @@ describe('Assertions', () => {
     });
 
     it('should parse ^ assertions with leading whitespace', () => {
-      const parser = parserFixture(
+      const parser = parserFixture('// ', '',
         '#pragma once',
         '  // ^ keyword.control.directive.pragma'
       );
@@ -151,7 +163,7 @@ describe('Assertions', () => {
     });
 
     it('should parse ^ assertions with prefixed whitespace whitespace', () => {
-      const parser = parserFixture(
+      const parser = parserFixture('// ', '',
         '#pragma once',
         '//    ^ keyword.control.directive.pragma'
       );
@@ -164,7 +176,7 @@ describe('Assertions', () => {
     });
 
     it('should parse ^^+ assertions', () => {
-      const parser = parserFixture(
+      const parser = parserFixture('// ', '',
         '#pragma once',
         '// ^^^^ keyword.control.directive.pragma'
       );
@@ -177,7 +189,7 @@ describe('Assertions', () => {
     });
 
     it('should parse multiple carats separated by spaces (^   ^ some.rule)', () => {
-      const parser = parserFixture(
+      const parser = parserFixture('// ', '',
         '#pragma once',
         '// ^     ^ some.symbol'
       );
