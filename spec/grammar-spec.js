@@ -58,6 +58,14 @@ describe('Grammar', () => {
       itShouldParse('// << something');
       itShouldParse('   // << something');
       itShouldParse('   // << something');
+
+      it('should could correctly parse custom open tokens', () => {
+        const { lex: hashLex, parse: hashParse } = parser('##########');
+        expect(hashParse(hashLex('##########<- something'))).toEqual([
+          [1],
+          ['@', ['something']],
+        ]);
+      });
     });
     describe('Positions', () => {
       itShouldParse('// << something');
