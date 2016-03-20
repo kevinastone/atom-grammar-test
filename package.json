@@ -10,27 +10,31 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "scripts": {
-    "diagrams": "./node_modules/.bin/babel lib/grammar.js | ./node_modules/.bin/browserify - -s parserFactory -t [ browserify-shim ] > docs/scripts/parser_factory.js"
+    "diagram": "./node_modules/.bin/inliner --nocompress docs/src/grammar.html > docs/grammar.html",
+    "diagrammer": "./node_modules/.bin/browserify -t [ babelify ] ./docs/src/diagrammer.js -s diagrammer > docs/scripts/diagrammer.js",
+    "docs": "npm run-script diagrammer && npm run-script diagram"
   },
   "files": [
     "lib"
   ],
-  "browserify-shim": {
-    "chevrotain": "global:chevrotain"
+  "browser": {
+    "grammar": "./lib/grammar.js",
+    "chevrotain": "./node_modules/chevrotain/lib/chevrotain"
   },
   "dependencies": {
-    "chevrotain": "^0.5.22"
+    "chevrotain": "^0.6.0"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
     "babel-eslint": "^5.0.0",
     "babel-preset-es2015": "^6.6.0",
     "babel-preset-stage-1": "^6.5.0",
+    "babelify": "^7.2.0",
     "browserify": "^13.0.0",
-    "browserify-shim": "^3.8.12",
     "eslint": "2.2.*",
     "eslint-config-airbnb": "^6.0.2",
-    "eslint-plugin-react": "^4.1.0"
+    "eslint-plugin-react": "^4.1.0",
+    "inliner": "^1.8.1"
   },
   "optionalDevDependencies": {
     "jasmine-es6": "^0.1.6"

@@ -9,6 +9,8 @@ It allows you to define grammar fixtures for testing your grammar rules.
 Because the fixtures match the source code format, they can be both
 programmatically tested as well as visually inspected for easily development.
 
+[View the grammar][grammar]
+
 Here's an adaption of the example provided in the Sublime docs where you
 define your tokenization assertions in-line as comments.  Note how it visually
 annotates how the grammar should be parsed.
@@ -82,4 +84,5 @@ npm install atom-grammar-test --save-dev
 - [language-1c-bsl](https://atom.io/packages/language-1c-bsl)
 
 [sublime-testing]: https://www.sublimetext.com/docs/3/syntax.html#Testing
+[grammar]: http://htmlpreview.github.io/?https://raw.githubusercontent.com/kevinastone/atom-grammar-test/master/docs/grammar.html
 [npm]: https://www.npmjs.com
