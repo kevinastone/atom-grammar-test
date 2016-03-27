@@ -3,7 +3,7 @@
 import parser from '../lib/grammar';
 import { escapeSpecName } from '../lib/jasmine';
 
-const { lex, parse } = parser('// ');
+const { lex, parse } = parser('//');
 
 
 function itShouldLex(expression) {
@@ -60,7 +60,7 @@ describe('Grammar', () => {
     });
 
     it('should could correctly lex custom open and closetokens', () => {
-      const { lex: hashLex } = parser('<!-- ', ' -->');
+      const { lex: hashLex } = parser('<!--', '-->');
       expect(() => hashLex('<!-- <- something -->')).not.toThrow();
     });
   });
@@ -68,19 +68,21 @@ describe('Grammar', () => {
   describe('Parsing', () => {
     describe('OpenToken', () => {
       itShouldParse('// << something');
+      itShouldParse('//<< something');
+      itShouldParse('//^ something');
       itShouldParse('   // << something');
       itShouldParse('   // << something');
 
       it('should could correctly parse custom open tokens', () => {
-        const { lex: htmlLex, parse: htmlParse } = parser('##########');
-        expect(htmlParse(htmlLex('##########<- something'))).toEqual([
+        const { lex: hashLex, parse: hashParse } = parser('##########');
+        expect(hashParse(hashLex('########## <- something'))).toEqual([
           [1],
           ['@', ['something']],
         ]);
       });
 
       it('should could correctly parse custom open and close tokens', () => {
-        const { lex: hashLex, parse: hashParse } = parser('<!-- ', ' -->');
+        const { lex: hashLex, parse: hashParse } = parser('<!--', '-->');
         expect(hashParse(hashLex('<!-- <- something -->'))).toEqual([
           [1],
           ['@', ['something']],
