@@ -33,9 +33,9 @@ describe('AtomGrammarTest Parser', () => {
     });
 
     it('should parse the comment token', () => {
-      expect(this.parser.header.openToken).toBe('// ');
-      expect(this.htmlParser.header.openToken).toBe('<!-- ');
-      expect(this.htmlParser.header.closeToken).toBe(' -->');
+      expect(this.parser.header.openToken).toBe('//');
+      expect(this.htmlParser.header.openToken).toBe('<!--');
+      expect(this.htmlParser.header.closeToken).toBe('-->');
     });
 
     it('should parse the source declaration', () => {

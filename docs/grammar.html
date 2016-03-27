@@ -161,18 +161,25 @@ exports.default = function (openToken) {
       var _this16 = _possibleConstructorReturn(this, Object.getPrototypeOf(GrammarParser).call(this, input, allTokens, false /* isErrorRecoveryEnabled */));
 
       var $ = _this16;
-      var openTokenLength = openToken.length;
+      var openTokenPos = -1;
 
       _this16.root = $.RULE('assertion', function () {
         $.OPTION(function () {
           return $.CONSUME(Whitespace);
         });
-        $.CONSUME(Comment);
+        var commentToken = $.CONSUME(Comment);
+        openTokenPos = commentToken.startColumn;
+        $.OPTION2(function () {
+          return $.CONSUME2(Whitespace);
+        });
         var positions = $.SUBRULE($.positions);
-        $.CONSUME2(Whitespace);
+        $.CONSUME3(Whitespace);
         var scopes = $.SUBRULE($.rules);
+        $.OPTION3(function () {
+          return $.CONSUME4(Whitespace);
+        });
         // Need to force consuming EOF to capture an optional close token
-        $.CONSUME(_chevrotain.EOF);
+        $.CONSUME5(_chevrotain.EOF);
         return [positions, scopes];
       });
 
@@ -184,8 +191,8 @@ exports.default = function (openToken) {
             $.CONSUME(EndOfLine);
             return [-1];
           } }, { ALT: function ALT() {
-            var token = $.CONSUME(Beginning);
-            return [token.startColumn - openTokenLength];
+            $.CONSUME(Beginning);
+            return [openTokenPos];
           } }, { ALT: function ALT() {
             var positions = [];
             $.AT_LEAST_ONE(isCaratLookahead, function () {
@@ -209,7 +216,7 @@ exports.default = function (openToken) {
 
       _this16.scopes = $.RULE('scopes', function () {
         var scopes = [$.SUBRULE($.scope)];
-        $.MANY(function () {
+        $.MANY(isScopeLookahead, function () {
           $.CONSUME(Whitespace);
           var scope = $.SUBRULE2($.scope);
           scopes.push(scope);
@@ -483,6 +490,12 @@ CloseParens.LABEL = ')';
 
 function isCaratLookahead() {
   var result = this.LA(1) instanceof Carat || this.LA(1) instanceof Whitespace && this.LA(2) instanceof Carat;
+
+  return result;
+}
+
+function isScopeLookahead() {
+  var result = this.LA(1) instanceof Identifier || this.LA(1) instanceof Whitespace && this.LA(2) instanceof Identifier;
 
   return result;
 }
@@ -1566,7 +1579,7 @@ function isCaratLookahead() {
 );
 
 },{}],7:[function(require,module,exports){
-/*! chevrotain - v0.6.0 */
+/*! chevrotain - v0.6.2 */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
@@ -1636,10 +1649,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	var API = {};
 	// semantic version
-	API.VERSION = "0.6.0";
+	API.VERSION = "0.6.2";
 	// runtime API
 	API.Parser = parser_public_1.Parser;
+	API.ParserDefinitionErrorType = parser_public_1.ParserDefinitionErrorType;
 	API.Lexer = lexer_public_1.Lexer;
+	API.LexerDefinitionErrorType = lexer_public_1.LexerDefinitionErrorType;
 	API.Token = tokens_public_1.Token;
 	API.VirtualToken = tokens_public_1.VirtualToken;
 	API.EOF = tokens_public_1.EOF;
