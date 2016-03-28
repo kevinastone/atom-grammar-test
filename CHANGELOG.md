@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.1 - 2016-03-27
+
+- Separate whitespace from comment open and close tokens (`//^ something`)
+
 ## 0.6.0 - 2016-03-09
 
 - Added negation modifier
