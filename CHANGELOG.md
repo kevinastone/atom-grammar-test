@@ -1,6 +1,6 @@
 # Changelog
 
-## Master
+## 0.6.2 - 2016-03-29
 
 - Reduced memory by not reloading grammr on every test spec
 
