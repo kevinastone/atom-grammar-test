@@ -1,5 +1,9 @@
 # Changelog
 
+## Master
+
+- Reduced memory by not reloading grammr on every test spec
+
 ## 0.6.1 - 2016-03-27
 
 - Separate whitespace from comment open and close tokens (`//^ something`)
