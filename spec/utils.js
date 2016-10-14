@@ -4,7 +4,7 @@ import path from 'path';
 
 
 export function fixtureFilename(filename) {
-  return path.join('spec', 'fixtures', filename);
+  return path.join(__dirname, 'fixtures', filename);
 }
 
 
