@@ -30,3 +30,22 @@ export function parsedLineFixture(filename, ...lines) {
   );
   return lineFixture(filename, ...parsedLines);
 }
+
+
+export class ReturnableIterator {
+  constructor(iterator) {
+    this.iterator = iterator;
+  }
+
+  [Symbol.iterator]() {
+    return this;
+  }
+
+  next() {
+    return this.iterator.next();
+  }
+
+  return() {
+    throw new Error('return() was called!');
+  }
+}
