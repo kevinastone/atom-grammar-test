@@ -1,6 +1,7 @@
 'use babel';
 
-import { zip, zipLongest, takeWhile } from '../lib/utils';
+import { zip, zipLongest, takeWhile, PreventReturn } from '../lib/utils';
+import { ReturnableIterator } from './utils';
 
 
 describe('Utils', () => {
@@ -51,6 +52,19 @@ describe('Utils', () => {
       const it = [0, 1][Symbol.iterator]();
       expect(Array.from(takeWhile(it, (item) => !item))).toEqual([0, 1]);
       expect(Array.from(takeWhile(it, (item) => !item))).toEqual([]);
+    });
+  });
+
+  describe('PreventReturn', () => {
+    it('should prevent early return', () => {
+      const it = new PreventReturn(new ReturnableIterator([1, 2, 3][Symbol.iterator]()));
+
+      for (const value of it) {
+        expect(value).toEqual(1);
+        break;
+      }
+
+      expect(Array.from(it)).toEqual([2, 3]);
     });
   });
 });
