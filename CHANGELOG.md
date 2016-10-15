@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.3 - 2016-10-14
+
+- Fixed iterator issue in Atom 1.12+ due to an ES6 iterator closing issue.
+
 ## 0.6.2 - 2016-03-29
 
 - Reduced memory by not reloading grammar on every test spec
