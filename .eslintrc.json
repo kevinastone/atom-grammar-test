@@ -11,6 +11,17 @@
     "no-unused-vars": [2, {"args": "after-used", "argsIgnorePattern": "^_", "varsIgnorePattern": "^_"}],
     "space-before-function-paren": [2, {"anonymous": "never", "named": "never"}],
     "func-names": [0],
-    "max-len": 0
+    "max-len": 0,
+    "no-restricted-syntax": [0],
+    "class-methods-use-this": [0],
+    "comma-dangle": ["warn", {
+      "arrays": "ignore",
+      "objects": "ignore",
+      "imports": "ignore",
+      "exports": "ignore",
+      "functions": "ignore"
+    }],
+    "no-underscore-dangle": [0],
+    "import/prefer-default-export": [0]
   }
 }

@@ -26,7 +26,7 @@ describe('Assertions', () => {
         '// ^ keyword.control.directive.pragma'
       );
       expect(
-        Array.from(parser).map((item) => item.line)
+        Array.from(parser).map(item => item.line)
       ).toEqual([
         '#pragma once',
       ]);

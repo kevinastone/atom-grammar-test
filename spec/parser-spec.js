@@ -12,7 +12,7 @@ describe('AtomGrammarTest Parser', () => {
         '// SYNTAX TEST "source.c"',
         '#pragma once',
         '// <- punctuation.definition.directive meta.preprocessor.c',
-        ' // <- keyword.control.directive.pragma'
+        ' // <- keyword.control.directive.pragma',
       );
       this.parser = parse(this.iterator);
     });
@@ -23,7 +23,7 @@ describe('AtomGrammarTest Parser', () => {
         '<!-- SYNTAX TEST "text.html.basic" -->',
         '<TagName>',
         '<!-- <- punctuation.definition.tag.begin.html -->',
-        '<!-- ^ entity.name.tag.other.html -->'
+        '<!-- ^ entity.name.tag.other.html -->',
       );
       this.htmlParser = parse(this.htmlIterator);
     });
@@ -44,12 +44,12 @@ describe('AtomGrammarTest Parser', () => {
     });
 
     it('should iterate the input lines', () => {
-      expect(Array.from(this.parser).map((line) => line.line)).toEqual([
+      expect(Array.from(this.parser).map(line => line.line)).toEqual([
         '#pragma once',
         '// <- punctuation.definition.directive meta.preprocessor.c',
         ' // <- keyword.control.directive.pragma',
       ]);
-      expect(Array.from(this.htmlParser).map((line) => line.line)).toEqual([
+      expect(Array.from(this.htmlParser).map(line => line.line)).toEqual([
         '<TagName>',
         '<!-- <- punctuation.definition.tag.begin.html -->',
         '<!-- ^ entity.name.tag.other.html -->',
