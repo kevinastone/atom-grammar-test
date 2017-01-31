@@ -1,7 +1,5 @@
 'use babel';
 
-/* @flow */
-
 import { parse } from '../lib/parser';
 import { lineFixture } from './utils';
 

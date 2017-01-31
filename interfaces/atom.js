@@ -4,12 +4,15 @@ interface Atom$Packages {
   activatePackage(name: string): void;
 }
 
-type Atom$Grammar$Token = mixed;
+type Atom$Grammar$Token = {
+  scopes: Array<string>,
+  value: string,
+};
 type Atom$Grammar$Rule = any;
 
 interface Atom$Grammar {
   tokenizeLine(line: string, ruleStack: ?Array<Atom$Grammar$Rule>, firstLine: boolean)
-    : [Array<Atom$Grammar$Token>, Array<Atom$Grammar$Rule>];
+    : {tokens: Array<Atom$Grammar$Token>, ruleStack: Array<Atom$Grammar$Rule>};
   tokenizeLines(text: string): Array<Atom$Grammar$Token>;
 }
 

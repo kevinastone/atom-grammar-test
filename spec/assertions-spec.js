@@ -7,23 +7,27 @@ import { Not, Only } from '../lib/matchers';
 import { parsedLineFixture } from './utils';
 
 /* ::
-import type { Header, HeaderIterable } from '../lib/parser';
+import type { HeaderType, HeaderIterator } from '../lib/parser';
 */
 
 // Neeed to fake Flow out
-function _annotateIterator(iterator /* : any */, header /* : Header */) /* : HeaderIterable */ {
+function _annotateIterator(
+  iterator /* : any */,
+  header /* : HeaderType */
+)/* : HeaderIterator */ {
   return Object.assign(iterator, { header });
 }
 
 
 function parserFixture(openToken, closeToken, ...lines) {
+  const header/* : HeaderType */ = {
+    openToken,
+    closeToken,
+    scope: 'source.c',
+  };
+
   const iterator = _annotateIterator(
-    parsedLineFixture('blah.txt', ...lines),
-    {
-      openToken,
-      closeToken,
-      scope: 'source.c',
-    }
+    parsedLineFixture('blah.txt', ...lines), header
   );
   return new AssertionParser(iterator);
 }

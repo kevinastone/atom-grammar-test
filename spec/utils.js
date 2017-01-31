@@ -35,20 +35,30 @@ export function parsedLineFixture(filename /* : string */, ...lines /* : Array<s
 }
 
 
-export class ReturnableIterator {
-  constructor(iterator) {
+export class ReturnableIterator/* :: <T> implements Iterable<T> */ {
+
+  /* ::
+  iterator: Iterator<T>;
+
+  @@iterator(): * {
+    return this;
+  };
+  */
+
+  constructor(iterator/* : Iterator<T> */) {
     this.iterator = iterator;
   }
 
+  // $FlowIssue
   [Symbol.iterator]() {
     return this;
   }
 
-  next() {
+  next() /* : * */ {
     return this.iterator.next();
   }
 
-  return() {
+  return() /* : * */ {
     throw new Error('return() was called!');
   }
 }
