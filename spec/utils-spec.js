@@ -1,4 +1,5 @@
 'use babel';
+
 /* @flow */
 
 import { zip, zipLongest, takeWhile, PreventReturn } from '../lib/utils';

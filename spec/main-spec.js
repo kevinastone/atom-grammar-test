@@ -1,4 +1,5 @@
 'use babel';
+
 /* @flow */
 
 /* eslint-env atomtest */

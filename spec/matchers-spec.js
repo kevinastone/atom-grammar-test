@@ -1,4 +1,5 @@
 'use babel';
+
 /* @flow */
 
 import { Contains, Only, Not } from '../lib/matchers';
