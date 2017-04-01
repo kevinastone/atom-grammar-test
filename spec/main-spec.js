@@ -11,6 +11,7 @@ describe('Atom Grammar Test Jasmine', () => {
   describe('C Syntax Assertions', () => {
     beforeEach(() => waitsForPromise(() => atom.packages.activatePackage('language-c')));
     grammarTest(fixtureFilename('C/syntax_test_c_example.c'));
+    grammarTest(fixtureFilename('C/syntax_test_c_example2.c'));
   });
   describe('HTML Syntax Assertions', () => {
     beforeEach(() => waitsForPromise(() => atom.packages.activatePackage('language-html')));

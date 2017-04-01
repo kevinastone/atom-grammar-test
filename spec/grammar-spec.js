@@ -63,6 +63,10 @@ describe('Grammar', () => {
       const { lex: hashLex } = parser('<!--', '-->');
       expect(() => hashLex('<!-- <- something -->')).not.toThrow();
     });
+    it('should could correctly lex custom open and closetokens with regex special characters', () => {
+      const { lex: hashLex } = parser('/*', '*/');
+      expect(() => hashLex('/* <- something */')).not.toThrow();
+    });
   });
 
   describe('Parsing', () => {
