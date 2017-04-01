@@ -1,6 +1,6 @@
 // SYNTAX TEST "source.c"
 #pragma once
-// <- punctuation.definition.directive meta.preprocessor.c
+// <- punctuation.definition.directive meta.preprocessor
  // <- keyword.control.directive.pragma
 
 // foo
