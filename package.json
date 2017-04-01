@@ -22,7 +22,8 @@
     "chevrotain": "./node_modules/chevrotain/lib/chevrotain"
   },
   "dependencies": {
-    "chevrotain": "^0.18.0"
+    "chevrotain": "^0.18.0",
+    "escape-string-regexp": "^1.0.5"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",
