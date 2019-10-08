@@ -8,6 +8,8 @@ import { fixtureFilename } from './utils';
 
 
 describe('Atom Grammar Test Jasmine', () => {
+  beforeEach(() => atom.config.set('core.useTreeSitterParsers', false));
+
   describe('C Syntax Assertions', () => {
     beforeEach(() => waitsForPromise(() => atom.packages.activatePackage('language-c')));
     grammarTest(fixtureFilename('C/syntax_test_c_example.c'));
